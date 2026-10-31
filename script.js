@@ -26,6 +26,10 @@ const messages = {
     whatsappLabel: 'WhatsApp', emailLabel: 'Gmail', footerContact: 'Say hello',
     notNow: 'Not now', welcomeHint: 'Choose your spot and cast your CST vote.', heroTitle: 'Pick our<br><em>Dinajpur day out.</em>',
     heroIntro: 'CST students from 1st, 2nd, 4th, and 6th semester are choosing one unforgettable picnic destination together. Cast your vote and let the best local adventure win.',
+    journeyEyebrow: 'THE TRIP IS PART OF THE PLAN',
+    journeyTitle: 'One bus. Our whole class. A day to remember.',
+    journeyIntro: 'Choose a destination together, then enjoy the ride with your classmates. The best stories start before we arrive.',
+    journeyDestination: 'PICNIC DAY · LET’S GO',
     browseSpots: 'Explore destinations', liveBoard: 'Live vote board', pollTitle: 'CST picnic poll',
     destinationCount: '10 handpicked places', heroPhotoEyebrow: 'Your next great day out',
     participantAccess: 'YOUR PICNIC VOTE STARTS HERE · এখান থেকেই শুরু হোক আপনার ভোট',
@@ -90,6 +94,10 @@ const messages = {
     notNow: 'এখন নয়', welcomeHint: 'আপনার পছন্দের জায়গা বেছে নিয়ে সিএসটি ভোট দিন।',
     heroTitle: 'চলো বেছে নিই<br><em>দিনাজপুরের সেরা ভ্রমণ!</em>',
     heroIntro: 'সিএসটি বিভাগের ১ম, ২য়, ৪র্থ ও ৬ষ্ঠ পর্বের শিক্ষার্থীরা একসঙ্গে বেছে নিচ্ছে পিকনিকের গন্তব্য। আপনার ভোট দিন, আর জিতুক সবার পছন্দের জায়গা!',
+    journeyEyebrow: 'যাত্রাটাও পিকনিকের আনন্দের অংশ',
+    journeyTitle: 'এক বাসভর্তি বন্ধু, সামনে দারুণ একটা দিন!',
+    journeyIntro: 'সবাই মিলে গন্তব্য বেছে নাও, তারপর সহপাঠীদের সঙ্গে বাসযাত্রাটাও উপভোগ করো। পৌঁছানোর আগেই শুরু হোক স্মরণীয় গল্প।',
+    journeyDestination: 'পিকনিক ডে · চলো যাই',
     browseSpots: 'গন্তব্যগুলো ঘুরে দেখুন', liveBoard: 'লাইভ ভোট বোর্ড', pollTitle: 'সিএসটি পিকনিক ভোট',
     destinationCount: 'বেছে নেওয়া ১০টি জায়গা', heroPhotoEyebrow: 'সামনে অপেক্ষা করছে দারুণ একটা দিন',
     semesterList: 'সিএসটি • ১ম + ২য় + ৪র্থ + ৬ষ্ঠ পর্ব', totalVotes: 'মোট ভোট',
@@ -150,6 +158,10 @@ const mixedOverrides = {
   welcomeHint: 'Choose your spot, vote দিন, and make it count!',
   heroTitle: 'Pick our<br><em>Dinajpur day out!</em><br><span class="bn-line">দিনাজপুরে হোক সেরা outing!</span>',
   heroIntro: 'CST students, চলো একসাথে choose করি picnic destination! ১ম, ২য়, ৪র্থ ও ৬ষ্ঠ পর্বের সবার vote welcome.',
+  journeyEyebrow: 'The trip is part of the fun / যাত্রাটাও পিকনিকের আনন্দের অংশ',
+  journeyTitle: 'One bus. Our whole class. A day to remember! / এক বাসভর্তি বন্ধু, সামনে দারুণ একটা দিন!',
+  journeyIntro: 'Choose a destination together, তারপর classmates-দের সঙ্গে bus ride-টাও enjoy করো। পৌঁছানোর আগেই শুরু হোক স্মরণীয় গল্প!',
+  journeyDestination: 'PICNIC DAY · LET’S GO / পিকনিক ডে · চলো যাই',
   pollTitle: 'CST Picnic Poll / পিকনিক ভোট',
   semesterList: 'CST · 1st + 2nd + 4th + 6th semester / ১ম + ২য় + ৪র্থ + ৬ষ্ঠ পর্ব',
   participationNote: 'Your CST friends are voting live / বন্ধুরা দিচ্ছে লাইভ ভোট',
@@ -528,8 +540,13 @@ document.querySelector('#exportCsv').addEventListener('click', downloadCsv);
 const themeSelect = document.querySelector('#themeSelect');
 const savedTheme = storage.get('picnicTheme', 'liquid');
 themeSelect.value = ['liquid', 'neon', 'dawn'].includes(savedTheme) ? savedTheme : 'liquid';
-document.documentElement.dataset.theme = themeSelect.value;
-themeSelect.addEventListener('change', () => { document.documentElement.dataset.theme = themeSelect.value; storage.set('picnicTheme', themeSelect.value); showToast(`${themeSelect.options[themeSelect.selectedIndex].text} ${t('themeSelected')}`); });
+const themeColor = document.querySelector('meta[name="theme-color"]');
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeColor.content = theme === 'neon' ? '#10152c' : theme === 'dawn' ? '#fff7f1' : '#fbf7ef';
+}
+applyTheme(themeSelect.value);
+themeSelect.addEventListener('change', () => { applyTheme(themeSelect.value); storage.set('picnicTheme', themeSelect.value); showToast(`${themeSelect.options[themeSelect.selectedIndex].text} ${t('themeSelected')}`); });
 
 function updatePollHeading(button) {
   const semester = button.dataset.semester;
