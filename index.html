@@ -4,50 +4,107 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fbf7ef">
-  <title>DPI CST Picnic — Choose our destination</title>
+  <title>Picnic Selection</title>
   <link rel="stylesheet" href="./styles.css">
   
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Dinajpur Polytechnic Institute home"><span class="brand-mark">✦</span><span>Gatherly <small>DPI · CST</small></span></a>
-    <div class="header-right"><label class="theme-picker" for="themeSelect"><span>Theme / থিম</span><select id="themeSelect" aria-label="Choose theme"><option value="liquid">Liquid Glass</option><option value="neon">Neon Night</option><option value="dawn">Soft Dawn</option></select></label><span class="live-dot" aria-hidden="true"></span><span id="liveStatus">Real votes only</span><span class="avatar-stack" aria-label="CST students are voting"><span>1S</span><span>2S</span><span>CS</span><span>+2</span></span></div>
+    <div class="header-right"><label class="language-picker" for="languageSelect"><span data-i18n="language">Language / ভাষা</span><select id="languageSelect" aria-label="Choose language / ভাষা বেছে নিন"><option value="mix">English + বাংলা</option><option value="en">English</option><option value="bn">বাংলা</option></select></label><label class="theme-picker" for="themeSelect"><span data-i18n="theme">Theme / থিম</span><select id="themeSelect" aria-label="Choose theme"><option value="liquid" data-i18n="themeLiquid">Liquid Glass / লিকুইড গ্লাস</option><option value="neon" data-i18n="themeNeon">Neon Night / নিয়ন রাত</option><option value="dawn" data-i18n="themeDawn">Soft Dawn / কোমল ভোর</option></select></label><span class="live-dot" aria-hidden="true"></span><span id="liveStatus" data-i18n="realVotes">Real votes only / শুধু আসল ভোট</span><span class="avatar-stack" aria-label="CST students are voting"><span>1S</span><span>2S</span><span>CS</span><span>+2</span></span></div>
   </header>
+
+  <dialog id="welcomeDialog" class="dialog welcome-dialog" aria-labelledby="welcomeTitle" aria-describedby="welcomeDescription">
+    <div class="welcome-card">
+      <button class="close-btn" id="welcomeClose" type="button" aria-label="Close welcome message">×</button>
+      <div class="welcome-art" id="welcomeCarousel" role="region" aria-roledescription="carousel" aria-label="Picnic destination photos">
+        <div class="welcome-slides" id="welcomeSlides"></div>
+        <span class="welcome-photo-shade" aria-hidden="true"></span>
+        <span class="welcome-sticker" data-i18n="picnicSticker">CST<br>DAY OUT<br>পিকনিক</span>
+        <div class="welcome-carousel-controls">
+          <button class="carousel-arrow" id="welcomePrevious" type="button" aria-label="Previous photo">‹</button>
+          <span class="carousel-position" id="welcomeSlidePosition" aria-live="off">1 / 10</span>
+          <button class="carousel-arrow" id="welcomeNext" type="button" aria-label="Next photo">›</button>
+        </div>
+      </div>
+      <div class="welcome-copy">
+        <p class="eyebrow" data-i18n="welcomeEyebrow">DPI · CST picnic 2026</p>
+        <h2 id="welcomeTitle" data-i18n="welcomeTitle">Good times are <em>calling.</em><br><span class="bn-line">আনন্দের দিন হাতছানি দিচ্ছে!</span></h2>
+        <p id="welcomeDescription" data-i18n="welcomeDescription">Fresh air, fun, food আর friends-এর সঙ্গে unforgettable memories! Help choose our picnic spot.</p>
+        <div class="welcome-date"><span>✦</span> <span data-i18n="picnicDate">November 10, 2026</span> <span class="welcome-divider">·</span> <span data-i18n="schoolName">Dinajpur Polytechnic Institute</span></div>
+        <div class="welcome-actions">
+          <button class="primary-btn" id="welcomeVote" type="button" autofocus><span data-i18n="placeVote">Place your vote / ভোট দিন</span><span>→</span></button>
+          <button class="secondary-btn" id="welcomeLater" type="button" data-i18n="notNow">Not now / এখন নয়</button>
+        </div>
+        <small class="welcome-hint" data-i18n="welcomeHint">Choose your spot, vote দিন, and make it count!</small>
+      </div>
+    </div>
+  </dialog>
 
   <main id="top" class="shell">
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">Dinajpur Polytechnic Institute <span>•</span> CST picnic 2026</p>
-        <h1>Pick our<br><em>Dinajpur day out.</em></h1>
-        <p class="intro">CST students from 1st, 2nd, 4th, and 6th semester are choosing one unforgettable picnic destination together. Cast your vote and let the best local adventure win.</p>
-        <div class="hero-actions"><button class="primary-btn" id="jumpToPlaces">Browse spots <span>↓</span></button><span class="updated"><span class="tiny-live"></span> Live vote board</span></div>
+        <p class="eyebrow"><span data-i18n="schoolName">Dinajpur Polytechnic Institute</span> <span>•</span> CST picnic 2026</p>
+        <h1 data-i18n="heroTitle">Pick our<br><em>Dinajpur day out!</em><br><span class="bn-line">দিনাজপুরে হোক সেরা outing!</span></h1>
+        <p class="intro" data-i18n="heroIntro">CST students, চলো একসাথে choose করি picnic destination! ১ম, ২য়, ৪র্থ ও ৬ষ্ঠ পর্বের সবার vote welcome.</p>
+        <div class="hero-actions"><button class="primary-btn" id="jumpToPlaces"><span data-i18n="browseSpots">Browse spots</span> <span>↓</span></button><button class="hero-vote-btn" id="heroVote" type="button"><span data-i18n="placeVote">Place my vote</span> <span aria-hidden="true">↗</span></button><span class="updated"><span class="tiny-live"></span> <span data-i18n="liveBoard">Live vote board</span></span></div>
       </div>
-      <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="blanket"></div><div class="basket">🧺</div><div class="flower flower-one">✿</div><div class="flower flower-two">✿</div></div>
+      <div class="hero-art" id="heroDestinationGallery" role="region" aria-label="Picnic destination photo highlights"></div>
     </section>
 
-    <section class="community-strip"><div><span class="pulse-ring">◎</span><div><strong>CST picnic poll</strong><small>CST • 1st + 2nd + 4th + 6th semester</small></div></div><div class="dept-pills"><button class="dept-pill active">CST</button><button class="dept-pill">1st semester</button><button class="dept-pill">2nd semester</button><button class="dept-pill">4th semester</button><button class="dept-pill">6th semester</button></div></section>
+    <section class="community-strip"><div><span class="pulse-ring">◎</span><div><strong data-i18n="pollTitle">CST picnic poll</strong><small data-i18n="semesterList">CST • 1st + 2nd + 4th + 6th semester</small></div></div><div class="dept-pills"><button class="dept-pill active">CST</button><button class="dept-pill" data-semester="1st">1st semester</button><button class="dept-pill" data-semester="2nd">2nd semester</button><button class="dept-pill" data-semester="4th">4th semester</button><button class="dept-pill" data-semester="6th">6th semester</button></div></section>
 
     <section class="summary-grid" aria-label="Vote summary">
-      <article class="summary-card"><span class="summary-icon coral">♡</span><div><strong id="totalVotes">0</strong><span>Total votes</span></div></article>
-      <article class="summary-card"><span class="summary-icon indigo">◷</span><div><strong id="countdown">—</strong><span>Until November 10, 2026</span></div></article>
-      <article class="summary-card progress-summary"><div class="summary-line"><span>Participation</span><strong id="participation">0%</strong></div><div class="track"><span id="participationBar" style="width:0%"></span></div><small>CST 1st + 2nd + 4th + 6th semester are voting live</small></article>
+      <article class="summary-card"><span class="summary-icon coral">♡</span><div><strong id="totalVotes">0</strong><span data-i18n="totalVotes">Total votes</span></div></article>
+      <article class="summary-card"><span class="summary-icon indigo">◷</span><div><strong id="countdown">—</strong><span data-i18n="untilDate">Until November 10, 2026</span></div></article>
+      <article class="summary-card progress-summary"><div class="summary-line"><span data-i18n="participation">Participation</span><strong id="participation">0%</strong></div><div class="track"><span id="participationBar" style="width:0%"></span></div><small data-i18n="participationNote">CST 1st + 2nd + 4th + 6th semester are voting live</small></article>
     </section>
 
-    <section class="pass-section" id="votingPass"><div class="section-heading"><div><p class="eyebrow">Participant access · অংশগ্রহণকারীর পরিচয়</p><h2>Your futuristic voting pass</h2><p class="section-context">Enter your CST details once, then choose a Rangpur Division destination to unlock your vote.</p></div><span class="pass-badge">CST 2026 · VERIFIED</span></div><div class="pass-grid"><form id="participantForm" class="voting-pass" novalidate><div class="pass-glow"></div><div class="pass-header"><span class="pass-chip">✦ DPI / CST</span><span>VOTING PASS · ভোটিং পাস</span></div><div class="form-grid"><label>Semester / সেমিস্টার<select id="semester" required><option value="">Select semester / নির্বাচন করুন</option><option>1st</option><option>2nd</option><option>4th</option><option>6th</option></select><small>Choose your current CST semester · বর্তমান সেমিস্টার বাছাই করুন</small></label><label>Shift / শিফট<select id="shift" required><option value="">Select shift / নির্বাচন করুন</option><option>1st Shift</option><option>2nd Shift</option></select></label><label>Roll / রোল<input id="roll" inputmode="numeric" pattern="[0-9]{1,6}" required placeholder="e.g. 1204"><small>1–6 digits · ১–৬ সংখ্যা</small></label><label>Phone / ফোন নম্বর<input id="phone" type="tel" pattern="01[3-9][0-9]{8}" required placeholder="01XXXXXXXXX"><small>11 digit Bangladesh number · ১১ সংখ্যার নম্বর</small></label></div><label class="destination-label">Destination / গন্তব্য<select id="destination" required><option value="">Select a Rangpur Division spot / গন্তব্য বাছাই করুন</option></select></label><p class="helper-text">Only destinations within Rangpur Division are eligible · শুধু রংপুর বিভাগের গন্তব্যগুলোই গ্রহণযোগ্য।</p><button class="primary-btn pass-submit" type="submit">Generate my voting pass <span>→</span></button></form><aside id="passResult" class="pass-result" aria-live="polite"><span class="result-icon">✦</span><p class="eyebrow">Pass status · পাসের অবস্থা</p><h3>Ready when you are</h3><p>Submit your details to receive a unique token and lock in your destination.</p></aside></div></section>
+    <section class="pass-section" id="votingPass"><div class="section-heading"><div><p class="eyebrow" data-i18n="participantAccess">YOUR PICNIC VOTE STARTS HERE · এখান থেকেই শুরু হোক আপনার ভোট</p><h2 data-i18n="votingPassTitle">Your futuristic voting pass</h2><p class="section-context" data-i18n="votingPassIntro">Enter your CST details once, then choose a Rangpur Division destination to unlock your vote.</p></div><span class="pass-badge" data-i18n="verified">CST 2026 · VERIFIED</span></div><div class="pass-grid"><form id="participantForm" class="voting-pass" novalidate><div class="pass-glow"></div><div class="pass-header"><span class="pass-chip">✦ DPI / CST</span><span data-i18n="passLabel">VOTING PASS · ভোটিং পাস</span></div><div class="form-grid"><label><span data-i18n="semesterLabel">Semester / সেমিস্টার</span><select id="semester" required><option value="" data-i18n="selectSemester">Select semester / নির্বাচন করুন</option><option value="1st">1st</option><option value="2nd">2nd</option><option value="4th">4th</option><option value="6th">6th</option></select><small data-i18n="semesterHelp">Choose your current CST semester · বর্তমান সেমিস্টার বাছাই করুন</small></label><label><span data-i18n="shiftLabel">Shift / শিফট</span><select id="shift" required><option value="" data-i18n="selectShift">Select shift / নির্বাচন করুন</option><option value="1st Shift" data-i18n="firstShift">1st Shift</option><option value="2nd Shift" data-i18n="secondShift">2nd Shift</option></select></label><label><span data-i18n="rollLabel">Roll / রোল</span><input id="roll" inputmode="numeric" pattern="[0-9]{1,6}" required placeholder="e.g. 1204"><small data-i18n="rollHelp">1–6 digits · ১–৬ সংখ্যা</small></label><label><span data-i18n="phoneLabel">Phone / ফোন নম্বর</span><input id="phone" type="tel" pattern="01[3-9][0-9]{8}" required placeholder="01XXXXXXXXX"><small data-i18n="phoneHelp">11 digit Bangladesh number · ১১ সংখ্যার নম্বর</small></label></div><label class="destination-label"><span data-i18n="destinationLabel">Destination / গন্তব্য</span><select id="destination" required><option value="" data-i18n="selectDestination">Select a Rangpur Division spot / গন্তব্য বাছাই করুন</option></select></label><p class="helper-text" data-i18n="destinationHelp">Only destinations within Rangpur Division are eligible · শুধু রংপুর বিভাগের গন্তব্যগুলোই গ্রহণযোগ্য।</p><button class="primary-btn pass-submit" type="submit"><span data-i18n="generatePass">Generate my voting pass</span> <span>→</span></button></form><aside id="passResult" class="pass-result" aria-live="polite"><span class="result-icon">✦</span><p class="eyebrow" data-i18n="passStatus">Pass status · পাসের অবস্থা</p><h3 data-i18n="ready">Ready when you are</h3><p data-i18n="readyIntro">Submit your details to receive a unique token and lock in your destination.</p></aside></div></section>
 
-    <section class="roster-section" id="studentRoster"><div class="roster-toolbar"><div><p class="eyebrow">Student voting ledger · শিক্ষার্থীদের তালিকা</p><h2>Who has voted?</h2><p class="roster-subtitle">Every completed voting pass appears here on this device. Download the list as an Excel-compatible CSV for the picnic coordinator.</p></div><button class="export-btn" id="exportCsv" type="button">⇩ Download Excel list / এক্সেল তালিকা</button></div><div class="roster-stats"><div class="roster-stat"><strong id="participantCount">0</strong> Students submitted · শিক্ষার্থী</div><span class="helper-text">Local coordinator view · স্থানীয় তালিকা</span></div><div class="table-wrap"><table class="roster-table"><thead><tr><th>Token / টোকেন</th><th>Semester</th><th>Shift</th><th>Roll / রোল</th><th>Phone / ফোন</th><th>Destination / গন্তব্য</th><th>Submitted</th></tr></thead><tbody id="participantList"><tr><td class="empty-roster" colspan="7">No student pass yet · এখনও কোনো পাস জমা হয়নি</td></tr></tbody></table></div></section>
+    <section class="roster-section" id="studentRoster"><div class="roster-toolbar"><div><p class="eyebrow" data-i18n="ledgerEyebrow">Student voting ledger · শিক্ষার্থীদের তালিকা</p><h2 data-i18n="ledgerTitle">Who has voted?</h2><p class="roster-subtitle" data-i18n="ledgerIntro">Every completed voting pass appears here on this device. Download the list as an Excel-compatible CSV for the picnic coordinator.</p></div><button class="export-btn" id="exportCsv" type="button" data-i18n="exportCsv">⇩ Download Excel list / এক্সেল তালিকা</button></div><div class="roster-stats"><div class="roster-stat"><strong id="participantCount">0</strong> <span data-i18n="studentsSubmitted">Students submitted · শিক্ষার্থী</span></div><span class="helper-text" data-i18n="localView">Local coordinator view · স্থানীয় তালিকা</span></div><div class="table-wrap"><table class="roster-table"><thead><tr><th data-i18n="token">Token / টোকেন</th><th data-i18n="semesterHeader">Semester</th><th data-i18n="shiftHeader">Shift</th><th data-i18n="rollHeader">Roll / রোল</th><th data-i18n="phoneHeader">Phone / ফোন</th><th data-i18n="destinationHeader">Destination / গন্তব্য</th><th data-i18n="submitted">Submitted</th></tr></thead><tbody id="participantList"><tr><td class="empty-roster" colspan="7" data-i18n="emptyRoster">No student pass yet · এখনও কোনো পাস জমা হয়নি</td></tr></tbody></table></div></section>
 
     <section class="places-section" id="places">
-      <div class="section-heading"><div><p class="eyebrow">DPI CST shortlist · November 10, 2026</p><h2>Where should we spread the blanket?</h2><p class="section-context">Swapnopuri leads the way, with memorable places across Dinajpur division.</p></div><button class="suggest-btn" id="openSuggest">＋ Suggest a place</button></div>
-      <div class="toolbar"><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search places or tags" aria-label="Search places or tags"></label><div class="filters" role="group" aria-label="Filter places"><button class="filter active" data-filter="all">All spots</button><button class="filter" data-filter="quiet">Quiet</button><button class="filter" data-filter="food">Food nearby</button></div></div>
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="shortlistEyebrow">DPI CST shortlist · November 10, 2026</p><h2 data-i18n="placesTitle">Where should we spread the blanket?</h2><p class="section-context" data-i18n="placesIntro">Swapnopuri leads the way, with memorable places across Dinajpur division.</p></div><button class="suggest-btn" id="openSuggest" data-i18n="suggestPlace">＋ Suggest a place</button></div>
+      <div class="toolbar"><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search places or tags" aria-label="Search places or tags" data-i18n-placeholder="searchPlaceholder"></label><div class="filters" role="group" aria-label="Filter places" data-i18n-aria="filterPlaces"><button class="filter active" data-filter="all" data-i18n="allSpots">All spots</button><button class="filter" data-filter="quiet" data-i18n="quiet">Quiet</button><button class="filter" data-filter="food" data-i18n="foodNearby">Food nearby</button></div></div>
       <div class="cards" id="placeList" aria-live="polite"></div>
-      <p class="no-results" id="noResults" hidden>No spots match that search. Try another word or suggest one!</p>
+      <p class="no-results" id="noResults" hidden data-i18n="noResults">No spots match that search. Try another word or suggest one!</p>
+      <p class="route-note"><span data-i18n="estimatesNote">Road distance and one-way bus times are rough planning estimates from Dinajpur Polytechnic Institute. Actual route, traffic, and bus pickup can change them. Open the live map directions before planning. Photos: Wikimedia Commons contributors; tap a photo credit for its license.</span> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>
     </section>
   </main>
 
-  <footer class="footer"><span>Dinajpur Polytechnic Institute <span class="footer-star">✦</span> CST · 1st + 2nd + 4th + 6th semester picnic</span><span>November 10, 2026 <span class="footer-star">✦</span> Gatherly</span></footer>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-topline">
+        <a class="footer-brand" href="#top"><span class="footer-brand-mark" aria-hidden="true">✦</span><span>Gatherly <small>DPI · CST</small></span></a>
+        <p data-i18n="footerTagline">A little planning today, a lifetime of picnic memories tomorrow.</p>
+      </div>
+      <div class="footer-main">
+        <section class="footer-event" aria-label="Picnic details">
+          <p class="footer-kicker"><span class="footer-status-dot" aria-hidden="true"></span> DPI · CST PICNIC 2026</p>
+          <h2 data-i18n="schoolName">Dinajpur Polytechnic Institute / দিনাজপুর পলিটেকনিক ইনস্টিটিউট</h2>
+          <p class="footer-event-copy"><span data-i18n="footerProgram">CST picnic · 1st + 2nd + 4th + 6th semester</span></p>
+          <div class="footer-date"><span aria-hidden="true">◷</span><span data-i18n="picnicDate">November 10, 2026 / ১০ নভেম্বর, ২০২৬</span></div>
+        </section>
+        <section class="footer-contact" aria-label="Developer contact">
+          <div class="footer-profile">
+            <span class="footer-avatar" aria-hidden="true">SS</span>
+            <div class="footer-profile-copy"><span data-i18n="developerLabel">Built by / নির্মাতা</span><strong>Srabon Sarker</strong></div>
+            <span class="footer-student-badge">CST · 4TH</span>
+          </div>
+          <p class="developer-bio" data-i18n="developerBio">CST · 4th-semester student at Dinajpur Polytechnic Institute / দিনাজপুর পলিটেকনিক ইনস্টিটিউটে সিএসটি বিভাগের ৪র্থ পর্বের শিক্ষার্থী</p>
+          <p class="footer-contact-label" data-i18n="footerContact">Say hello / যোগাযোগ করুন</p>
+          <div class="footer-links">
+            <a href="https://wa.me/8801908990410" target="_blank" rel="noopener noreferrer"><span class="contact-icon" aria-hidden="true">◉</span><span data-i18n="whatsappLabel">WhatsApp</span><span class="contact-value">+8801908990410</span><span class="footer-link-arrow" aria-hidden="true">↗</span></a>
+            <a href="mailto:srabonsarker920@gmail.com"><span class="contact-icon" aria-hidden="true">✉</span><span data-i18n="emailLabel">Gmail</span><span class="contact-value">srabonsarker920@gmail.com</span><span class="footer-link-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+      </div>
+      <div class="footer-bottom"><span data-i18n="footerMadeFor">Made with care for DPI CST students</span><a href="#top"><span data-i18n="footerBackTop">Back to top</span> <span aria-hidden="true">↑</span></a></div>
+    </div>
+  </footer>
 
-  <dialog id="suggestDialog" class="dialog"><form method="dialog" id="suggestForm"><button class="close-btn" value="cancel" aria-label="Close">×</button><p class="eyebrow">Add to the shortlist</p><h2>Know a perfect spot?</h2><p class="dialog-copy">Drop in a name and a quick vibe. Your suggestion will appear for everyone.</p><label>Place name<input required id="placeName" maxlength="40" placeholder="e.g. The Sculpture Garden"></label><label>Why it’s good<input required id="placeReason" maxlength="80" placeholder="e.g. Shady, spacious, snacks nearby"></label><div class="dialog-actions"><button class="secondary-btn" value="cancel">Not now</button><button class="primary-btn" value="default">Add place <span>→</span></button></div></form></dialog>
+  <dialog id="suggestDialog" class="dialog"><form method="dialog" id="suggestForm"><button class="close-btn" value="cancel" aria-label="Close">×</button><p class="eyebrow" data-i18n="addShortlist">Add to the shortlist</p><h2 data-i18n="suggestTitle">Know a perfect spot?</h2><p class="dialog-copy" data-i18n="suggestIntro">Drop in a name and a quick vibe. Your suggestion will appear for everyone.</p><label><span data-i18n="placeName">Place name</span><input required id="placeName" maxlength="40" placeholder="e.g. The Sculpture Garden" data-i18n-placeholder="placeNamePlaceholder"></label><label><span data-i18n="whyGood">Why it’s good</span><input required id="placeReason" maxlength="80" placeholder="e.g. Shady, spacious, snacks nearby" data-i18n-placeholder="whyGoodPlaceholder"></label><div class="dialog-actions"><button class="secondary-btn" value="cancel" data-i18n="notNow">Not now</button><button class="primary-btn" value="default"><span data-i18n="addPlace">Add place</span> <span>→</span></button></div></form></dialog>
   <div id="confetti" class="confetti" aria-hidden="true"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./script.js"></script>
