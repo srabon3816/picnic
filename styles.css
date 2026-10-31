@@ -420,8 +420,8 @@ html[data-theme="dawn"] .summary-card,html[data-theme="dawn"] .place-card,html[d
 .footer-student-badge { margin-left:auto; padding:6px 9px; color:#d5d2ff; border:1px solid rgba(189,185,255,.25); border-radius:999px; background:rgba(133,128,220,.13); font-size:.55rem; font-weight:850; letter-spacing:.06em; white-space:nowrap; }
 .developer-bio { margin:11px 0 15px; color:rgba(255,255,255,.64); font-size:.66rem; line-height:1.7; }
 .footer-contact-label { margin:0 0 8px; color:#c6c3ff; font-size:.61rem; font-weight:850; letter-spacing:.07em; }
-.footer-links { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.footer-links a { display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; align-items:center; gap:7px; min-width:0; padding:10px 9px; color:rgba(255,255,255,.63); border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(255,255,255,.055); text-decoration:none; font-size:.62rem; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.footer-links { display:grid; grid-template-columns:1fr; gap:7px; }
+.footer-links a { display:grid; grid-template-columns:20px 68px minmax(0,1fr) 16px; align-items:center; gap:8px; min-width:0; padding:10px 11px; color:rgba(255,255,255,.63); border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(255,255,255,.055); text-decoration:none; font-size:.62rem; transition:transform .2s ease,border-color .2s ease,background .2s ease; }
 .footer-links a:hover { color:#fff; border-color:rgba(189,185,255,.42); background:rgba(255,255,255,.1); transform:translateY(-2px); }
 .contact-icon { color:#ffb694; }
 .contact-value { min-width:0; overflow:hidden; color:#fff; font-size:.61rem; font-weight:800; text-overflow:ellipsis; }
@@ -441,7 +441,6 @@ html[data-theme="dawn"] .summary-card,html[data-theme="dawn"] .place-card,html[d
   .footer-main { gap:18px; padding:21px 0 18px; }
   .footer-event h2 { font-size:1.58rem; }
   .footer-contact { padding:15px; border-radius:17px; }
-  .footer-links { grid-template-columns:1fr; }
-  .footer-links a { grid-template-columns:auto auto minmax(0,1fr) auto; }
+  .footer-links a { grid-template-columns:20px 68px minmax(0,1fr) 16px; gap:7px; padding:10px 9px; }
   .footer-bottom { align-items:flex-start; line-height:1.55; }
 }
